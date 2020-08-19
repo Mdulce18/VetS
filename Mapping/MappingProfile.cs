@@ -17,7 +17,7 @@ namespace VetS.Mapping
             //API a Dominio
             CreateMap<MascotaResource, Mascota>()
                 .ForMember(m => m.Id, opt => opt.Ignore());
-            //.ForMember(m => m.Animal.Razas.Select(id => new Raza { Id=id}), opt => opt.MapFrom(mr => mr.RazaId));
+            
         }
     }
 }
