@@ -16,5 +16,7 @@ namespace VetS.Data
         }
 
         public DbSet<Animal> Animales { get; set; }
+        public DbSet<Raza> Razas { get; set; }
+        public DbSet<Mascota> Mascotas { get; set; }
     }
 }
