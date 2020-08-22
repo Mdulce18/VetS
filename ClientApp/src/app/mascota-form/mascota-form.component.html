@@ -2,29 +2,32 @@
 <p>
   {{mascota | json}}
 </p>
-<form (ngSubmit)="Guardar()">
+<form #f="ngForm" (ngSubmit)="Guardar()">
   <div class="form group">
     <label for="nombre">Nombre</label>
-    <input  type="text" id="nombre"value="" class="form-control" [(ngModel)]="nombre" (change)="alIngresarNombre()" name="nombre"/>
+    <input  type="text" id="nombre"value="" class="form-control" [(ngModel)]="nombre" (change)="alIngresarNombre()" name="nombre" required #animal="ngModel"/>
+    <div class="alert alert-danger" *ngIf="animal.touched && !animal.valid">Por favor ingrese un Nombre para la mascota.</div>
   </div>
   <div class="form-group">
     <label for="animal">Animal</label>
-    <select id="animal" class="form-control" (change)="alCambiarAnimal()" [(ngModel)]="mascota.animalId" name="animalId">
+    <select id="animal" class="form-control" (change)="alCambiarAnimal()" [(ngModel)]="mascota.animalId" name="animalId" required #pet="ngModel">
       <option value=""></option>
       <option *ngFor="let a of animales" value="{{ a.id }}">{{ a.nombre }}</option>
     </select>
+    <div class="alert alert-danger" *ngIf="pet.touched && !pet.valid">Por favor seleccione un animal</div>
   </div>
   <div class="form-group">
     <label for="raza">Raza</label>
-    <select id="raza" class="form-control" [(ngModel)]="mascota.razaId" name="razaId">
+    <select id="raza" class="form-control" [(ngModel)]="mascota.razaId" name="razaId" required #pet2="ngModel">
       <option value=""></option>
       <option *ngFor="let r of razas" value="{{ r.id }}">{{ r.nombre }}</option>
     </select>
+    <div class="alert alert-danger" *ngIf="pet2.touched && !pet2.valid">Por favor seleccione una raza</div>
   </div>
   <div class="form-group">
     <label for="nacimiento">Fecha de nacimiento</label>
     <input type="date" value="" id="nacimiento" class="form-control" (change)="alSelFNacimiento()" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" />
   </div>
-  <button class="btn btn-primary">Guardar</button>
+  <button class="btn btn-primary" [disabled]="!f.valid">Guardar</button>
 
 </form>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MascotaService } from '../../services/mascota.service';
-
 @Component({
     selector: 'app-mascota-form',
     templateUrl: './mascota-form.component.html',
@@ -8,15 +7,16 @@ import { MascotaService } from '../../services/mascota.service';
 })
 /** mascota-form component*/
 export class MascotaFormComponent implements OnInit {
-  nombre: any;
+  nombre: string;
   animales: any;
-  razas: any;
+  razas: any = [];
   fechaNacimiento: Date;
   mascota: any = {}
   ;
 
   /** mascota-form ctor */
-  constructor(private mascotaService: MascotaService) {
+  constructor(
+      private mascotaService: MascotaService) {
 
   }
 
@@ -26,12 +26,14 @@ export class MascotaFormComponent implements OnInit {
 
   alIngresarNombre() {
     this.mascota.nombre = this.nombre;
+    
   }
 
   alCambiarAnimal() {
     var animalSeleccionado = this.animales.find(a => a.id == this.mascota.animalId);
     this.razas = animalSeleccionado ? animalSeleccionado.razas : [];
     delete this.mascota.razaId;
+    
   }
 
   alSelFNacimiento() {
@@ -40,6 +42,9 @@ export class MascotaFormComponent implements OnInit {
   }
 
   Guardar() {
+    this.mascota.animalId = Number(this.mascota.animalId);
+    this.mascota.razaId = Number(this.mascota.razaId);
+
     this.mascotaService.createMascota(this.mascota)
       .subscribe(x => console.log(x));
   }
