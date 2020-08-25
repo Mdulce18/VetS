@@ -17,4 +17,8 @@ export class MascotaService {
   createMascota(mascota) {
     return this.http.post("/api/mascotas", mascota);
   }
+
+  getMascota(id) {
+    return this.http.get("/api/mascotas/" + id);
+  }
 }
