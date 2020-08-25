@@ -23,9 +23,9 @@ export class MascotaFormComponent implements OnInit {
       private tostrService: ToastrService,
       private mascotaService: MascotaService) {
 
-          route.params.subscribe(p => {
+        /**  route.params.subscribe(p => {
           this.mascota.id = +p['id'];
-        });
+        }); **/
       
   }
 
@@ -33,8 +33,8 @@ export class MascotaFormComponent implements OnInit {
     this.mascotaService.getAnimales().subscribe(animales => this.animales = animales);
 
 
-    this.mascotaService.getMascota(this.mascota.id)
-        .subscribe(m => { this.mascota = m; });
+  //  this.mascotaService.getMascota(this.mascota.id)
+  //      .subscribe(m => { this.mascota = m; });
   }
 
   alIngresarNombre() {
