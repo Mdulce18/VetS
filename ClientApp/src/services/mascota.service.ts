@@ -29,4 +29,8 @@ export class MascotaService {
   deleteMascota(id) {
     return this.http.delete('/api/mascotas/' + id);
   }
+
+  getMascotas() {
+    return this.http.get('/api/mascotas');
+  }
 }
