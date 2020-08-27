@@ -2,10 +2,10 @@
 <p>
   {{mascota | json}}
 </p>
-<form #f="ngForm" (ngSubmit)="Guardar()">
+<form #f="ngForm" (ngSubmit)="guardar()">
   <div class="form group">
     <label for="nombre">Nombre</label>
-    <input  type="text" id="nombre"value="" class="form-control" [(ngModel)]="nombre" (change)="alIngresarNombre()" name="nombre" required #animal="ngModel"/>
+    <input  type="text" id="nombre" [value]="mascota.nombre" class="form-control" [(ngModel)]="nombre" (change)="alIngresarNombre()" name="nombre" required #animal="ngModel"/>
     <div class="alert alert-danger" *ngIf="animal.touched && !animal.valid">Por favor ingrese un Nombre para la mascota.</div>
   </div>
   <div class="form-group">
@@ -26,8 +26,9 @@
   </div>
   <div class="form-group">
     <label for="nacimiento">Fecha de nacimiento</label>
-    <input type="date" value="" id="nacimiento" class="form-control" (change)="alSelFNacimiento()" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" />
+    <input type="date" [value]="mascota.fechaNacimiento| date:'yyyy-MM-dd'" id="nacimiento" class="form-control" (change)="alSelFNacimiento()" [(ngModel)]="fechaNacimiento" name="fechaNacimiento" />
   </div>
   <button class="btn btn-primary" [disabled]="!f.valid">Guardar</button>
+  <button *ngIf="mascota.id"class="btn btn-danger" type="button" (click)="borrar()">Borrar</button>
 
 </form>

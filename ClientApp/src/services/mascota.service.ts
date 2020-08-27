@@ -11,14 +11,22 @@ export class MascotaService {
   }
 
   getAnimales() {
-    return this.http.get("/api/animales");
+    return this.http.get('/api/animales');
   }
 
   createMascota(mascota) {
-    return this.http.post("/api/mascotas", mascota);
+    return this.http.post('/api/mascotas', mascota);
   }
 
   getMascota(id) {
-    return this.http.get("/api/mascotas/" + id);
+    return this.http.get('/api/mascotas/' + id);
+  }
+
+  updateMascota(mascota) {
+    return this.http.put('/api/mascotas/' + mascota.id, mascota);
+  }
+
+  deleteMascota(id) {
+    return this.http.delete('/api/mascotas/' + id);
   }
 }

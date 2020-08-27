@@ -5,7 +5,7 @@ namespace VetS.Controllers.Resources
 {
     public class MascotaResource
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required]
         [StringLength(100)]

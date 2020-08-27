@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -14,6 +14,7 @@ import { AuthorizeGuard } from 'src/api-authorization/authorize.guard';
 import { AuthorizeInterceptor } from 'src/api-authorization/authorize.interceptor';
 import { MascotaFormComponent } from './mascota-form/mascota-form.component';
 import { MascotaService } from '../services/mascota.service';
+import { AppErrorHandler } from './app-error-handler';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MascotaService } from '../services/mascota.service';
     }), 
   ],
   providers: [
+    { provide: ErrorHandler, useClass: AppErrorHandler },
     MascotaService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
