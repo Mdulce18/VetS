@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VetS.Data;
 using VetS.Models;
@@ -26,13 +28,6 @@ namespace VetS.Controllers.Resources
         {
             if (!ModelState.IsValid)
                 return BadRequest();
-
-            //var raza = await vetSDbContext.Razas.FindAsync(mascotaResource.RazaId);
-            //if (raza == null)
-            //{
-            //    ModelState.AddModelError("RazaId", "RazaId invalida.");
-            //    return BadRequest(ModelState);
-            //}
 
             var mascota = mapper.Map<MascotaResource, Mascota>(mascotaResource);
             mascota.Actualizacion = DateTime.Now;
@@ -88,6 +83,17 @@ namespace VetS.Controllers.Resources
             var mascotaResource = mapper.Map<Mascota, MascotaResource>(mascota);
 
             return Ok(mascotaResource);
+        }
+
+        [HttpGet]
+        public async Task<IEnumerable<MascotaResource>> TodasLasMascotas()
+        {
+            var mascotas = await vetSDbContext.Mascotas
+                .Include(m => m.Animal)
+                    .ThenInclude(m => m.Razas)
+                .ToListAsync();
+
+            return mapper.Map<IEnumerable<Mascota>, IEnumerable<MascotaResource>>(mascotas);
         }
     }
 }

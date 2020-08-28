@@ -15,13 +15,15 @@ import { AuthorizeInterceptor } from 'src/api-authorization/authorize.intercepto
 import { MascotaFormComponent } from './mascota-form/mascota-form.component';
 import { MascotaService } from '../services/mascota.service';
 import { AppErrorHandler } from './app-error-handler';
+import { MascotaListComponent } from './mascota-list/mascota-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    MascotaFormComponent
+    MascotaFormComponent,
+    MascotaListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,7 +31,9 @@ import { AppErrorHandler } from './app-error-handler';
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', redirectTo:'mascotas', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent},
+      { path: 'mascotas', component: MascotaListComponent },
       { path: 'mascotas/new', component: MascotaFormComponent },
       { path: 'mascotas/:id', component: MascotaFormComponent },
     ]),
