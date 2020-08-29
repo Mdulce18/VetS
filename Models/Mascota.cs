@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace VetS.Models
-{
+{#
     public class Mascota
     {
         public int Id { get; set; }
