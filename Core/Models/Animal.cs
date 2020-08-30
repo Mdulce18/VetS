@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace VetS.Models
+namespace VetS.Core.Models
 {
     public class Animal
     {

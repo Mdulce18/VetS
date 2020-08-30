@@ -4,9 +4,9 @@ import { Mascota } from '../../models/mascota';
 import { KeyValuePair } from '../../models/keyValuePair';
 
 @Component({
-    selector: 'app-mascota-list',
-    templateUrl: './mascota-list.component.html',
-    styleUrls: ['./mascota-list.component.css']
+  selector: 'app-mascota-list',
+  templateUrl: './mascota-list.component.html',
+  styleUrls: ['./mascota-list.component.css']
 })
 /** mascota-list component*/
 export class MascotaListComponent implements OnInit {
@@ -19,11 +19,26 @@ export class MascotaListComponent implements OnInit {
   ngOnInit() {
     this.mascotaService.getAnimales().subscribe(animales => this.animales = animales);
 
-    this.mascotaService.getMascotas().subscribe(mascotas => this.mascotas = mascotas);
+    this.llenarConMascotas();
+  }
+
+  private llenarConMascotas() {
+    this.mascotaService.getMascotas(this.filtro).subscribe(mascotas => this.mascotas = mascotas);
   }
 
   alCambiarFiltro() {
+    this.llenarConMascotas();
+  }
 
+  sortBy(nombreColumna) {
+    if (this.filtro.sortBy === nombreColumna) {
+      this.filtro.isSortAscending = false;
+    } else {
+      this.filtro.sortBy = nombreColumna;
+      this.filtro.isSortAscendig = true;
+    }
+
+    this.llenarConMascotas();
   }
 
 }

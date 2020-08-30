@@ -21,8 +21,8 @@ export class MascotaFormComponent implements OnInit {
   mascota: SaveMascota = {
     id: 0,
     nombre: '',
-    animalId: 0,
-    razaId: 0,
+    animalId:0,
+    razaId:0,
     fechaNacimiento:'',
   }
   ;
@@ -63,8 +63,8 @@ export class MascotaFormComponent implements OnInit {
   setMascota(m) {
     this.mascota.id = m.id;
     this.mascota.nombre = m.nombre;
-    this.mascota.animalId = m.animalId;
-    this.mascota.razaId = m.razaId;
+    this.mascota.animalId = m.animal.id;
+    this.mascota.razaId = m.raza.id;
     this.mascota.fechaNacimiento = m.fechaNacimiento;
   }
 
@@ -75,12 +75,11 @@ export class MascotaFormComponent implements OnInit {
 
   alCambiarAnimal() {
     this.llenarFormulario();
-    //delete this.mascota.razaId;
-    
+    delete this.mascota.razaId;
   }
 
   llenarFormulario() {
-    var animalSeleccionado = this.animales.find(a => a.id == this.mascota.animalId);
+    var animalSeleccionado = this.animales.find(a => a.id == this.mascota.animalId );
     this.razas = animalSeleccionado ? animalSeleccionado.razas : [];
   }
 
