@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using VetS.Data;
-using VetS.Models;
+using VetS.Core;
+using VetS.Core.Models;
 
 namespace VetS.Controllers.Resources
 {
@@ -13,60 +12,70 @@ namespace VetS.Controllers.Resources
     public class MascotasController : Controller
     {
         private readonly IMapper mapper;
-        private readonly VetSDbContext vetSDbContext;
+        private readonly IMascotaRepository repository;
+        private readonly IUnitOfWork unitOfWork;
 
-        public MascotasController(IMapper mapper, VetSDbContext vetSDbContext)
+        public MascotasController(IMapper mapper, IMascotaRepository repository, IUnitOfWork unitOfWork)
         {
             this.mapper = mapper;
-            this.vetSDbContext = vetSDbContext;
+            this.repository = repository;
+            this.unitOfWork = unitOfWork;
         }
 
 
 
         [HttpPost]
-        public async Task<IActionResult> CrearMascota([FromBody] MascotaResource mascotaResource)
+        public async Task<IActionResult> CrearMascota([FromBody] SaveMascotaResource mascotaResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var mascota = mapper.Map<MascotaResource, Mascota>(mascotaResource);
+            var mascota = mapper.Map<SaveMascotaResource, Mascota>(mascotaResource);
             mascota.Actualizacion = DateTime.Now;
 
-            vetSDbContext.Mascotas.Add(mascota);
-            await vetSDbContext.SaveChangesAsync();
+            repository.Add(mascota);
+            await unitOfWork.CompleteAsync();
 
-            return Ok(mascota);
+            mascota = await repository.GetMascota(mascota.Id);
+
+            var resultado = mapper.Map<Mascota, MascotaResource>(mascota);
+
+            return Ok(resultado);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> ActualizarMascota(int id, [FromBody] MascotaResource mascotaResource)
+        public async Task<IActionResult> ActualizarMascota(int id, [FromBody] SaveMascotaResource mascotaResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var mascota = await vetSDbContext.Mascotas.FindAsync(id);
+            var mascota = await repository.GetMascota(id);
 
             if (mascota == null)
                 return NotFound();
 
-            mascota = mapper.Map<MascotaResource, Mascota>(mascotaResource, mascota);
+            mascota = mapper.Map<SaveMascotaResource, Mascota>(mascotaResource, mascota);
             mascota.Actualizacion = DateTime.Now;
 
-            await vetSDbContext.SaveChangesAsync();
+            await unitOfWork.CompleteAsync();
 
-            return Ok(mascota);
+            mascota = await repository.GetMascota(mascota.Id);
+
+            var resultado = mapper.Map<Mascota, MascotaResource>(mascota);
+
+            return Ok(resultado);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> BorrarMascota(int id)
         {
-            var mascota = await vetSDbContext.Mascotas.FindAsync(id);
+            var mascota = await repository.GetMascota(id, IncludeRelated: false);
 
             if (mascota == null)
                 return NotFound();
 
-            vetSDbContext.Remove(mascota);
-            await vetSDbContext.SaveChangesAsync();
+            repository.Remove(mascota);
+            await unitOfWork.CompleteAsync();
 
             return Ok(id);
 
@@ -75,7 +84,7 @@ namespace VetS.Controllers.Resources
         [HttpGet("{id}")]
         public async Task<IActionResult> TraerMascota(int id)
         {
-            var mascota = await vetSDbContext.Mascotas.FindAsync(id);
+            var mascota = await repository.GetMascota(id);
 
             if (mascota == null)
                 return NotFound();
@@ -86,12 +95,10 @@ namespace VetS.Controllers.Resources
         }
 
         [HttpGet]
-        public async Task<IEnumerable<MascotaResource>> TodasLasMascotas()
+        public async Task<IEnumerable<MascotaResource>> TodasLasMascotas(MascotaQueryResource filtroResource)
         {
-            var mascotas = await vetSDbContext.Mascotas
-                .Include(m => m.Animal)
-                    .ThenInclude(m => m.Razas)
-                .ToListAsync();
+            var filtro = mapper.Map<MascotaQueryResource, MascotaQuery>(filtroResource);
+            var mascotas = await repository.GetTodasLasMascotas(filtro);
 
             return mapper.Map<IEnumerable<Mascota>, IEnumerable<MascotaResource>>(mascotas);
         }

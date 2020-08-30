@@ -1,3 +1,4 @@
+import { KeyValuePair } from "./keyValuePair";
 
 export interface SaveMascota {
   id: number;

@@ -7,9 +7,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using VetS.Core;
+using VetS.Core.Models;
 using VetS.Data;
 using VetS.Mapping;
-using VetS.Models;
 
 namespace VetS
 {
@@ -25,6 +26,9 @@ namespace VetS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IMascotaRepository, MascotaRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             // Auto Mapper Configurations
             var mappingConfig = new MapperConfiguration(mc =>
             {

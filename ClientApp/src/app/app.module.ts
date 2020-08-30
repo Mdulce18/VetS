@@ -31,7 +31,7 @@ import { MascotaListComponent } from './mascota-list/mascota-list.component';
     FormsModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-      { path: '', redirectTo:'mascotas', pathMatch: 'full' },
+      { path: '', redirectTo: 'mascotas', pathMatch: 'full' },
       { path: 'home', component: HomeComponent},
       { path: 'mascotas', component: MascotaListComponent },
       { path: 'mascotas/new', component: MascotaFormComponent },
