@@ -3,8 +3,8 @@ import { KeyValuePair } from "./keyValuePair";
 export interface Mascota {
   id: number;
   nombre: string;
-  animalId: number;
-  razaId: number;
+  animal: KeyValuePair;
+  raza: KeyValuePair;
   fechaNacimiento: string;
   actualizacion: string;
 }

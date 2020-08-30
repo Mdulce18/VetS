@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VetS.Controllers.Resources;
 using VetS.Data;
-using VetS.Core.Models;
+using VetS.Models;
 
 namespace VetS.Controllers
 {

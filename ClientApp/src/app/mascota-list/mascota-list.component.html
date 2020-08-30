@@ -4,20 +4,21 @@
 </p>
 <div class="form-group">
   <label for="animal"></label>
-  <select id="animal" class="form-control" [(ngModel)]="filtro.animalId" (change)="alCambiarFiltro()">
+  <select id="animal"class="form-control" >
     <option value=""></option>
     <option *ngFor="let a of animales" value="{{a.id}}">{{a.nombre}}</option>
+
+
   </select>
 </div>
 <table class="table">
   <thead>
     <tr>
-      <th>ID</th>
-      <th (click)="sortBy('Nombre')">Nombre</th>
-      <th (click)="sortBy('Animal')">Animal</th>
-      <th (click)="sortBy('Raza')">Raza</th>
-      <th (click)="sortBy('fechaNacimiento')">Fecha de Nacimiento</th>
-      <th (click)="sortBy('actualizacion')">Última Actualización</th>
+      <th>ID</th> 
+      <th>Nombre</th>
+      <th>Animal</th>
+      <th>Raza</th>
+      <th>Fecha de Nacimiento</th>
       <th></th>
     </tr>
   </thead>
@@ -25,10 +26,9 @@
     <tr *ngFor="let m of mascotas">
       <td>{{m.id}}</td>
       <td>{{m.nombre}}</td>
-      <td>{{m.animal.nombre}}</td>
-      <td>{{m.raza.nombre}}</td>
+      <td>{{m.animalId}}</td>
+      <td>{{m.razaId}}</td>
       <td>{{m.fechaNacimiento | date:'mediumDate'}}</td>
-      <td>{{m.actualizacion | date:'mediumDate'}}</td>
       <td>
         <a [routerLink]="['/mascotas/', m.id]">Editar</a>
       </td>

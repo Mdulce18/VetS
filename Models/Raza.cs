@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VetS.Core.Models
+namespace VetS.Models
 {
     [Table("Razas")]
     public class Raza

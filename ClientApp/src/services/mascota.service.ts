@@ -29,18 +29,8 @@ export class MascotaService {
   deleteMascota(id) {
     return this.http.delete('/api/mascotas/' + id);
   }
-  getMascotas(filtro) {
-    return this.http.get('/api/mascotas' + '?' + this.queryString(filtro));
-  }
 
-  queryString(obj) {
-    var partes = [];
-    for (var property in obj) {
-      var valor = obj[property]
-      if (valor != null && valor != undefined)
-        partes.push(encodeURIComponent(property) + '=' + encodeURIComponent(valor));
-    }
-
-    return partes.join('&');
+  getMascotas() {
+    return this.http.get('/api/mascotas');
   }
 }
