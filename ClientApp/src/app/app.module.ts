@@ -16,6 +16,7 @@ import { MascotaFormComponent } from './mascota-form/mascota-form.component';
 import { MascotaService } from '../services/mascota.service';
 import { AppErrorHandler } from './app-error-handler';
 import { MascotaListComponent } from './mascota-list/mascota-list.component';
+import { PaginationComponent } from './shared/pagination.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MascotaListComponent } from './mascota-list/mascota-list.component';
     NavMenuComponent,
     HomeComponent,
     MascotaFormComponent,
-    MascotaListComponent
+    MascotaListComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

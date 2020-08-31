@@ -22,7 +22,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let m of mascotas">
+    <tr *ngFor="let m of queryResult.items">
       <td>{{m.id}}</td>
       <td>{{m.nombre}}</td>
       <td>{{m.animal.nombre}}</td>
@@ -35,3 +35,4 @@
     </tr>
   </tbody>
 </table>
+<pagination [total-items]="queryResult.totalItems" [page-size]="filtro.pageSize" (page-changed)="onPageChange($event)"></pagination>    

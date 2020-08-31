@@ -9,6 +9,7 @@ namespace VetS.Mapping
         public MappingProfile()
         {
             //Dominio a API
+            CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<Animal, AnimalResource>();
             CreateMap<Raza, RazaResource>();
             CreateMap<Mascota, SaveMascotaResource>();

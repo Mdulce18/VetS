@@ -29,9 +29,10 @@ namespace VetS.Data
                 .SingleOrDefaultAsync(m => m.Id == id);
         }
 
-        public async Task<IEnumerable<Mascota>> GetTodasLasMascotas(MascotaQuery queryObj)
+        public async Task<QueryResult<Mascota>> GetTodasLasMascotas(MascotaQuery queryObj)
         {
-            //return await 
+            var result = new QueryResult<Mascota>();
+
             var query = context.Mascotas
               .Include(m => m.Animal)
                   .ThenInclude(m => m.Razas)
@@ -52,7 +53,13 @@ namespace VetS.Data
 
             query = query.ApplyOrdering(queryObj, columnas);
 
-            return await query.ToListAsync();
+            result.TotalItems = await query.CountAsync();
+
+            query = query.ApplyPaging(queryObj);
+
+            result.Items = await query.ToListAsync();
+
+            return result;
         }
         public void Add(Mascota mascota)
         {

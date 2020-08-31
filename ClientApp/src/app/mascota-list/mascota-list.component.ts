@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MascotaService } from '../../services/mascota.service';
-import { Mascota } from '../../models/mascota';
-import { KeyValuePair } from '../../models/keyValuePair';
 
 @Component({
   selector: 'app-mascota-list',
@@ -10,9 +8,12 @@ import { KeyValuePair } from '../../models/keyValuePair';
 })
 /** mascota-list component*/
 export class MascotaListComponent implements OnInit {
-  mascotas: any = [];
+  private readonly PAGE_SIZE = 5;
+  queryResult: any = {};
   animales: any = [];
-  filtro: any = {};
+  filtro: any = {
+    pageSize: this.PAGE_SIZE
+  };
 
   constructor(private mascotaService: MascotaService) { }
 
@@ -23,21 +24,29 @@ export class MascotaListComponent implements OnInit {
   }
 
   private llenarConMascotas() {
-    this.mascotaService.getMascotas(this.filtro).subscribe(mascotas => this.mascotas = mascotas);
+    this.mascotaService.getMascotas(this.filtro)
+      .subscribe(result => this.queryResult = result);
   }
 
   alCambiarFiltro() {
+    this.filtro.page = 1;
+    //this.filtro.pageSize = this.PAGE_SIZE;
     this.llenarConMascotas();
   }
 
   sortBy(nombreColumna) {
     if (this.filtro.sortBy === nombreColumna) {
-      this.filtro.isSortAscending = false;
+      this.filtro.isSortAscending = !this.filtro.isSortAscending;
     } else {
       this.filtro.sortBy = nombreColumna;
       this.filtro.isSortAscendig = true;
     }
 
+    this.llenarConMascotas();
+  }
+
+  onPageChange(page) {
+    this.filtro.page = page;
     this.llenarConMascotas();
   }
 
