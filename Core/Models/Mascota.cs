@@ -14,7 +14,7 @@ namespace VetS.Core.Models
         public Animal Animal { get; set; }
         public int RazaId { get; set; }
         public Raza Raza { get; set; }
-
+        public bool Asignada { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public DateTime Actualizacion { get; set; }
 

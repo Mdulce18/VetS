@@ -9,6 +9,8 @@ namespace VetS.Mapping
         public MappingProfile()
         {
             //Dominio a API
+            CreateMap<Cliente, ClienteResource>()
+                .ForMember(cr => cr.Contacto, opt => opt.MapFrom(c => new ContactoResource { Nombre = c.Nombre, Apellido = c.Apellido, Telefono = c.Telefono, Direccion = c.Direccion, Email = c.Email }));
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<Animal, AnimalResource>();
             CreateMap<Raza, RazaResource>();
@@ -18,6 +20,14 @@ namespace VetS.Mapping
 
 
             //API a Dominio
+            CreateMap<ClienteResource, Cliente>()
+                .ForMember(c => c.Id, opt => opt.Ignore())
+                .ForMember(c => c.Nombre, opt => opt.MapFrom(cr => cr.Contacto.Nombre))
+                .ForMember(c => c.Apellido, opt => opt.MapFrom(cr => cr.Contacto.Apellido))
+                .ForMember(c => c.Telefono, opt => opt.MapFrom(cr => cr.Contacto.Telefono))
+                .ForMember(c => c.Direccion, opt => opt.MapFrom(cr => cr.Contacto.Direccion))
+                .ForMember(c => c.Email, opt => opt.MapFrom(cr => cr.Contacto.Email));
+
             CreateMap<MascotaQueryResource, MascotaQuery>();
             CreateMap<SaveMascotaResource, Mascota>()
                 .ForMember(m => m.Id, opt => opt.Ignore());

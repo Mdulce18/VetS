@@ -8,6 +8,12 @@ namespace VetS.Data
 {
     public class VetSDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
+        public DbSet<Animal> Animales { get; set; }
+        public DbSet<Raza> Razas { get; set; }
+        public DbSet<Mascota> Mascotas { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
+
+
         public VetSDbContext(
             DbContextOptions options,
             IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
@@ -15,8 +21,16 @@ namespace VetS.Data
 
         }
 
-        public DbSet<Animal> Animales { get; set; }
-        public DbSet<Raza> Razas { get; set; }
-        public DbSet<Mascota> Mascotas { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Raza>()
+            .HasOne<Animal>(r => r.Animal)
+            .WithMany(a => a.Razas)
+            .HasForeignKey(r => r.AnimalId)
+            .OnDelete(DeleteBehavior.NoAction);
+        }
+
     }
 }
