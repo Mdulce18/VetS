@@ -37,10 +37,14 @@
     <Compile Remove="Data\Migrations\20200817203256_ModeloInicial.Designer.cs" />
     <Compile Remove="Data\Migrations\20200817210316_ModeloInicial.cs" />
     <Compile Remove="Data\Migrations\20200817210316_ModeloInicial.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\services\" />
+    <Compile Remove="Data\Migrations\20200901190057_Cliente.cs" />
+    <Compile Remove="Data\Migrations\20200901190057_Cliente.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200901214754_Cliente.cs" />
+    <Compile Remove="Data\Migrations\20200901214754_Cliente.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200901223546_Cliente.cs" />
+    <Compile Remove="Data\Migrations\20200901223546_Cliente.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200901224613_Cliente.cs" />
+    <Compile Remove="Data\Migrations\20200901224613_Cliente.Designer.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

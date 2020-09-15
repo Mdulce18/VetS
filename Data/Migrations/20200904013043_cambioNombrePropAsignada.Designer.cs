@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetS.Data;
 
 namespace VetS.Data.Migrations
 {
     [DbContext(typeof(VetSDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200904013043_cambioNombrePropAsignada")]
+    partial class cambioNombrePropAsignada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,6 +238,26 @@ namespace VetS.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("VetS.Controllers.Resources.KeyValuePairResource", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClienteId");
+
+                    b.ToTable("KeyValuePairResource");
+                });
+
             modelBuilder.Entity("VetS.Core.Models.Animal", b =>
                 {
                     b.Property<int>("Id")
@@ -361,21 +383,6 @@ namespace VetS.Data.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("VetS.Core.Models.ClienteMascota", b =>
-                {
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MascotaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClienteId", "MascotaId");
-
-                    b.HasIndex("MascotaId");
-
-                    b.ToTable("ClienteMascotas");
-                });
-
             modelBuilder.Entity("VetS.Core.Models.Mascota", b =>
                 {
                     b.Property<int>("Id")
@@ -485,19 +492,11 @@ namespace VetS.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VetS.Core.Models.ClienteMascota", b =>
+            modelBuilder.Entity("VetS.Controllers.Resources.KeyValuePairResource", b =>
                 {
-                    b.HasOne("VetS.Core.Models.Cliente", "Cliente")
+                    b.HasOne("VetS.Core.Models.Cliente", null)
                         .WithMany("Mascotas")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VetS.Core.Models.Mascota", "Mascota")
-                        .WithMany()
-                        .HasForeignKey("MascotaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClienteId");
                 });
 
             modelBuilder.Entity("VetS.Core.Models.Mascota", b =>

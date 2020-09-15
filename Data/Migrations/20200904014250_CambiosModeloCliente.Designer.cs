@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetS.Data;
 
 namespace VetS.Data.Migrations
 {
     [DbContext(typeof(VetSDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200904014250_CambiosModeloCliente")]
+    partial class CambiosModeloCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -361,21 +363,6 @@ namespace VetS.Data.Migrations
                     b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("VetS.Core.Models.ClienteMascota", b =>
-                {
-                    b.Property<int>("ClienteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MascotaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ClienteId", "MascotaId");
-
-                    b.HasIndex("MascotaId");
-
-                    b.ToTable("ClienteMascotas");
-                });
-
             modelBuilder.Entity("VetS.Core.Models.Mascota", b =>
                 {
                     b.Property<int>("Id")
@@ -387,6 +374,9 @@ namespace VetS.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ClienteId")
                         .HasColumnType("int");
 
                     b.Property<bool>("EstaAsignada")
@@ -406,6 +396,8 @@ namespace VetS.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AnimalId");
+
+                    b.HasIndex("ClienteId");
 
                     b.HasIndex("RazaId");
 
@@ -485,21 +477,6 @@ namespace VetS.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VetS.Core.Models.ClienteMascota", b =>
-                {
-                    b.HasOne("VetS.Core.Models.Cliente", "Cliente")
-                        .WithMany("Mascotas")
-                        .HasForeignKey("ClienteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VetS.Core.Models.Mascota", "Mascota")
-                        .WithMany()
-                        .HasForeignKey("MascotaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("VetS.Core.Models.Mascota", b =>
                 {
                     b.HasOne("VetS.Core.Models.Animal", "Animal")
@@ -507,6 +484,10 @@ namespace VetS.Data.Migrations
                         .HasForeignKey("AnimalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("VetS.Core.Models.Cliente", null)
+                        .WithMany("Mascotas")
+                        .HasForeignKey("ClienteId");
 
                     b.HasOne("VetS.Core.Models.Raza", "Raza")
                         .WithMany()

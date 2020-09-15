@@ -17,10 +17,13 @@ import { MascotaService } from '../services/mascota.service';
 import { AppErrorHandler } from './app-error-handler';
 import { MascotaListComponent } from './mascota-list/mascota-list.component';
 import { PaginationComponent } from './shared/pagination.component';
+import { ClienteService } from '../services/cliente.service';
+import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ClienteFormComponent,
     NavMenuComponent,
     HomeComponent,
     MascotaFormComponent,
@@ -35,6 +38,8 @@ import { PaginationComponent } from './shared/pagination.component';
     RouterModule.forRoot([
       { path: '', redirectTo: 'mascotas', pathMatch: 'full' },
       { path: 'home', component: HomeComponent},
+      { path: 'clientes/new', component: ClienteFormComponent},
+      { path: 'clientes/:id', component: ClienteFormComponent},
       { path: 'mascotas', component: MascotaListComponent },
       { path: 'mascotas/new', component: MascotaFormComponent },
       { path: 'mascotas/:id', component: MascotaFormComponent },
@@ -49,6 +54,7 @@ import { PaginationComponent } from './shared/pagination.component';
   providers: [
     { provide: ErrorHandler, useClass: AppErrorHandler },
     MascotaService,
+    ClienteService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

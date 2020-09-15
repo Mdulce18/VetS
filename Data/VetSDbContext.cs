@@ -12,6 +12,7 @@ namespace VetS.Data
         public DbSet<Raza> Razas { get; set; }
         public DbSet<Mascota> Mascotas { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<ClienteMascota> ClienteMascotas { get; set; }
 
 
         public VetSDbContext(
@@ -30,6 +31,9 @@ namespace VetS.Data
             .WithMany(a => a.Razas)
             .HasForeignKey(r => r.AnimalId)
             .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ClienteMascota>().HasKey(cm =>
+             new { cm.ClienteId, cm.MascotaId });
         }
 
     }

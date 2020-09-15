@@ -30,11 +30,11 @@ namespace VetS.Core.Models
         [StringLength(20)]
         public string DNI { get; set; }
         public DateTime Actualizacion { get; set; }
-        public ICollection<Mascota> Mascotas { get; set; }
+        public ICollection<ClienteMascota> Mascotas { get; set; }
 
         public Cliente()
         {
-            Mascotas = new Collection<Mascota>();
+            Mascotas = new Collection<ClienteMascota>();
         }
 
     }

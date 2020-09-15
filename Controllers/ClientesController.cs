@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using VetS.Controllers.Resources;
 using VetS.Core;
@@ -15,15 +17,15 @@ namespace VetS.Controllers
         private readonly IMapper mapper;
         private readonly IUnitOfWork unitOfWork;
         private readonly IClienteRepository repository;
+        private readonly IMascotaRepository mascotaRepository;
 
-        public ClientesController(IMapper mapper, IClienteRepository repository, IUnitOfWork unitOfWork)
+        public ClientesController(IMapper mapper, IClienteRepository repository, IMascotaRepository mascotaRepository, IUnitOfWork unitOfWork)
         {
             this.mapper = mapper;
             this.repository = repository;
+            this.mascotaRepository = mascotaRepository;
             this.unitOfWork = unitOfWork;
         }
-
-        public IClienteRepository Repository { get; }
 
         [HttpPost()]
         public async Task<IActionResult> CrearCliente([FromBody] ClienteResource clienteResource)
@@ -37,44 +39,71 @@ namespace VetS.Controllers
             repository.Add(cliente);
             await unitOfWork.CompleteAsync();
 
-            return Ok();
+            cliente = await repository.GetCliente(cliente.Id);
+
+            var resultado = mapper.Map<Cliente, ClienteResource>(cliente);
+
+            return Ok(resultado);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> TraerClientes(int id)
         {
             var cliente = await repository.GetCliente(id);
+
             if (cliente == null)
                 return NotFound();
 
-            var resultado = mapper.Map<Cliente, ClienteResource>(cliente);
+            var clienteResource = mapper.Map<Cliente, ClienteResource>(cliente);
 
-            return Ok(resultado);
+            return Ok(clienteResource);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> ActualizarCliente(int id, [FromBody] ClienteResource clienteResource)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest(ModelState);
 
             var cliente = await repository.GetCliente(id);
+
             if (cliente == null)
                 return NotFound();
 
             cliente = mapper.Map<ClienteResource, Cliente>(clienteResource, cliente);
-            cliente.Actualizacion = DateTime.Now;
 
-            await unitOfWork.CompleteAsync();
+            if (clienteResource.MascotaId > 0)
+            {
+                var mascota = await mascotaRepository.GetMascota(clienteResource.MascotaId);
 
+                if (mascota == null)
+                    return NotFound(mascota.Id);
+                var clienteMascota = new ClienteMascota { ClienteId = cliente.Id, MascotaId = mascota.Id };
+
+                if (!mascota.EstaAsignada)
+
+                    cliente.Mascotas.Add(clienteMascota);
+
+                else
+                {
+                    var removedMascota = cliente.Mascotas.Where(cm => cm.MascotaId == clienteResource.MascotaId).ToList();
+                    foreach (var m in removedMascota)
+                        cliente.Mascotas.Remove(m);
+                }
+
+                mascota.EstaAsignada = !mascota.EstaAsignada;
+
+                cliente.Actualizacion = DateTime.Now;
+
+                await unitOfWork.CompleteAsync();
+            }
             cliente = await repository.GetCliente(cliente.Id);
-            if (cliente == null)
-                return NotFound();
 
             var resultado = mapper.Map<Cliente, ClienteResource>(cliente);
 
             return Ok(resultado);
         }
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> BorrarCliente(int id)
@@ -83,10 +112,33 @@ namespace VetS.Controllers
             if (cliente == null)
                 return NotFound();
 
+            var cantidad = cliente.Mascotas.Count();
+            if (cantidad == 0)
+
+                repository.Remove(cliente);
+
+            else
+            {
+                var removedMascotas = cliente.Mascotas.ToList();
+                foreach (var m in removedMascotas)
+                {
+                    var mascota = await mascotaRepository.GetMascota(m.MascotaId);
+                    mascota.EstaAsignada = !mascota.EstaAsignada;
+                }
+            }
+
             repository.Remove(cliente);
             await unitOfWork.CompleteAsync();
 
             return Ok(id);
         }
+
+        [HttpGet]
+        public async Task<IEnumerable<ClienteResource>> TraerClientes()
+        {
+            return await repository.GetClientes();
+
+        }
+
     }
 }

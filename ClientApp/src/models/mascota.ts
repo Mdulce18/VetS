@@ -1,4 +1,3 @@
-import { KeyValuePair } from "./keyValuePair";
 
 export interface Mascota {
   id: number;

@@ -11,7 +11,7 @@
     "e2e": "ng e2e"
   },
   "styles": [
-    "styles.scss",
+    "styles.css",
     "node_modules/ngx-toastr/toastr.css" 
   ],
   "private": true,
