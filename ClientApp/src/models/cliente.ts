@@ -5,5 +5,5 @@ export interface Cliente {
   contacto: Contacto;
   DNI: string;
   mascotaId: number;
-    
+  clienteMascota: any;
 }

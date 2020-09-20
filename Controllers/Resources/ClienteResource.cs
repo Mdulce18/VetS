@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace VetS.Controllers.Resources
@@ -9,6 +10,7 @@ namespace VetS.Controllers.Resources
 
         public ContactoResource Contacto { get; set; }
         public string DNI { get; set; }
+        public DateTime Actualizacion { get; set; }
         public int MascotaId { get; set; }
         public ICollection<int> Mascotas { get; set; }
 

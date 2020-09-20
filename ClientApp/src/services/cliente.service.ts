@@ -9,11 +9,6 @@ export class ClienteService {
   constructor(private http: HttpClient) {
 
   }
-
-  getClientes() {
-    return this.http.get('api/clientes');
-  }
-
   createCliente(cliente) {
     return this.http.post('/api/clientes', cliente);
   }
@@ -30,6 +25,20 @@ export class ClienteService {
   }
 
   getMascotas() {
-    return this.http.get('/api/mascotas');
+    return this.http.get('/api/mascotas/todas');
+  }
+
+  getClientes(filtro) {
+    return this.http.get('api/clientes' + '?' + this.queryString(filtro));
+  }
+  queryString(obj) {
+    var partes = [];
+    for (var property in obj) {
+      var valor = obj[property]
+      if (valor != null && valor != undefined)
+        partes.push(encodeURIComponent(property) + '=' + encodeURIComponent(valor));
+    }
+
+    return partes.join('&');
   }
 }

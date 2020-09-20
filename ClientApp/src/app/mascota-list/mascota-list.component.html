@@ -2,12 +2,14 @@
 <p>
   <a [routerLink]="['/mascotas/new']" class="btn btn-primary">Nueva Mascota</a>
 </p>
-<div class="form-group">
-  <label for="animal"></label>
-  <select id="animal" class="form-control" [(ngModel)]="filtro.animalId" (change)="alCambiarFiltro()">
-    <option value=""></option>
-    <option *ngFor="let a of animales" value="{{a.id}}">{{a.nombre}}</option>
-  </select>
+<div class="well">
+  <div class="form-group">
+    <label for="animal"></label>
+    <select id="animal" class="form-control" [(ngModel)]="filtro.animalId" (change)="alCambiarFiltro()">
+      <option value=""></option>
+      <option *ngFor="let a of animales" value="{{a.id}}">{{a.nombre}}</option>
+    </select>
+  </div>
 </div>
 <table class="table">
   <thead>

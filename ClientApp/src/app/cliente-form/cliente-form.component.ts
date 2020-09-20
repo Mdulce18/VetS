@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from '../../services/cliente.service';
 import { Cliente } from '../../models/cliente';
-//import { Contacto } from '../../models/conctacto';
 import { ToastrService } from 'ngx-toastr';
 import { MascotaService } from '../../services/mascota.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -34,8 +33,8 @@ export class ClienteFormComponent implements OnInit{
       direccion: '',
       email: '',},
     DNI: '',
-    mascotaId:0
-   
+    mascotaId:0,
+    clienteMascota: []
   }
   /** cliente-form ctor */
   constructor(
@@ -67,10 +66,6 @@ export class ClienteFormComponent implements OnInit{
           this.setCliente(data[1])
       });
 
-    //this.clienteService.getClientes().subscribe(clientes => this.clientes = clientes);
-    //console.log("Clientes", this.clientes);
-    //this.mascotaService.getMascotas(this.filtro).subscribe(mascotas => this.mascotas = mascotas);
-    //console.log("mascotas", this.mascotas);
   }
 
   setCliente(c) {
@@ -82,7 +77,7 @@ export class ClienteFormComponent implements OnInit{
     this.cliente.contacto.email = c.contacto.email;
     this.cliente.DNI = c.dni;
     this.cliente.mascotaId = c.mascotaId;
-    
+    this.cliente.clienteMascota =c.mascotas
   }
 
   alSeleccionarNombre() {

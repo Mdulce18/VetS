@@ -9,6 +9,7 @@ namespace VetS.Core
     {
         Task<Cliente> GetCliente(int id);
         Task<IEnumerable<ClienteResource>> GetClientes();
+        Task<QueryResult<Cliente>> GetTodosLosClientess(ClienteQuery queryObj);
         void Add(Cliente cliente);
         void Remove(Cliente cliente);
     }

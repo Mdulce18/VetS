@@ -1,0 +1,30 @@
+<h1>Clientes</h1>
+<p>
+  <a [routerLink]="['/clientes/new']" class="btn btn-primary">Nuevo Cliente</a>
+</p>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th (click)="sortBy('Nombre')">Nombre</th>
+        <th (click)="sortBy('Apellido')">Apellido</th>
+        <th (click)="sortBy('DNI')">D.N.I</th>
+        <th (click)="sortBy('Actualizacion')">Última Actualización</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of queryResult.items">
+        <td>{{c.id}}</td>
+        <td>{{c.contacto.nombre}}</td>
+        <td>{{c.contacto.apellido}}</td>
+        <td>{{c.dni}}</td>
+        <td>{{c.actualizacion | date:'mediumDate'}}</td>
+        <td>
+          <a [routerLink]="['/clientes/', c.id]">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination [total-items]="queryResult.totalItems" [page-size]="filtro.pageSize" (page-changed)="onPageChange($event)"></pagination>

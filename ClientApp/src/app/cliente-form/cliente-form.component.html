@@ -1,4 +1,5 @@
-<h1>Nuevo Cliente</h1>
+<h1 *ngIf="!cliente.id">Nuevo Cliente</h1>
+<h1 *ngIf="cliente.id">Editar Cliente</h1>
 
 <p>
   {{cliente | json}}
@@ -7,41 +8,45 @@
   <div class="form group">
     <label for="nombre">Nombre</label>
     <input type="text" id="nombre" [value]="cliente.contacto.nombre" class="form-control" [(ngModel)]="nombre" (change)="alSeleccionarNombre()" name="nombre" required #name="ngModel" />
-    <div class="alert alert-danger" *ngIf="name.touched && !name.valid">Por favor ingrese un Nombre</div>
+      <div class="alert alert-danger" *ngIf="name.touched && !name.valid">Por favor ingrese un Nombre</div>
   </div>
   <div class="form-group">
     <label for="apellido">Apellido</label>
     <input type="text" id="apellido" [value]="cliente.contacto.apellido" class="form-control" [(ngModel)]="apellido" (change)="alSeleccionarApellido()" name="apellido" required #ape="ngModel" />
-    <div class="alert alert-danger" *ngIf="ape.touched && !ape.valid">Por favor ingrese un apellido</div>
-  </div>
+      <div class="alert alert-danger" *ngIf="ape.touched && !ape.valid">Por favor ingrese un apellido</div>
+    </div>
   <div class="form-group">
     <label for="telefono">Telefono</label>
     <input type="text" id="telefono" [value]="cliente.contacto.telefono" class="form-control" [(ngModel)]="telefono" (change)="alSeleccionarTelefono()" name="Telefono" required #tel="ngModel" />
-    <div class="alert alert-danger" *ngIf="tel.touched && !tel.valid">Por favor ingrese un número de Teléfono</div>
-  </div>
-  <div class="form-group">
-    <label for="direccion">Dirección</label>
-    <input type="text" id="direccion" [value]="cliente.contacto.direccion" class="form-control" [(ngModel)]="direccion" (change)="alSeleccionarDireccion()" name="direccion" />
-    <!--<div class="alert alert-danger" *ngIf="direccion.touched && !direccion.valid">Por favor ingrese un apellido</div>-->
-  </div>
-  <div class="form-group">
-    <label for="email">E-mail</label>
-    <input type="text" id="email" [value]="cliente.contacto.email" class="form-control" [(ngModel)]="email" (change)="alSeleccionarEmail()" name="email" required #correo="ngModel" />
-    <div class="alert alert-danger" *ngIf="correo.touched && !correo.valid">Por favor ingrese un email válido</div>
-  </div>
-  <div class="form-group">
-    <label for="DNI">DNI</label>
-    <input type="text" id="DNI" [value]="cliente.DNI" class="form-control" [(ngModel)]="DNI" (change)="alSeleccionarDNI()" name="DNI" required #dni="ngModel" />
-    <div class="alert alert-danger" *ngIf="dni.touched && !dni.valid">Por favor ingrese un número de DNI válido</div>
-  </div>
-  <div class="form-group">
-    <label for="mascota">Mascota</label>
-    <select id="mascota" class="form-control" [(ngModel)]="mascotaId" (change)="alSelecionarMascota()" name="mascota">
-      <option value=""></option>
-      <option *ngFor="let m of mascotas.items" value="{{m.id}}">{{m.nombre}}</option>
-    </select>
-  </div>
-  <button class="btn btn-primary" [disabled]="!f.valid">Guardar</button>
-  <button *ngIf="cliente.id" class="btn btn-danger" type="button" (click)="borrar()">Borrar</button>
+      <div class="alert alert-danger" *ngIf="tel.touched && !tel.valid">Por favor ingrese un número de Teléfono</div>
+    </div>
+    <div class="form-group">
+      <label for="direccion">Dirección</label>
+      <input type="text" id="direccion" [value]="cliente.contacto.direccion" class="form-control" [(ngModel)]="direccion" (change)="alSeleccionarDireccion()" name="direccion" />
+      <!--<div class="alert alert-danger" *ngIf="direccion.touched && !direccion.valid">Por favor ingrese un apellido</div>-->
+    </div>
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="text" id="email" [value]="cliente.contacto.email" class="form-control" [(ngModel)]="email" (change)="alSeleccionarEmail()" name="email" required #correo="ngModel" />
+        <div class="alert alert-danger" *ngIf="correo.touched && !correo.valid">Por favor ingrese un email válido</div>
+      </div>
+    <div class="form-group">
+      <label for="DNI">DNI</label>
+      <input type="text" id="DNI" [value]="cliente.DNI" class="form-control" [(ngModel)]="DNI" (change)="alSeleccionarDNI()" name="DNI" required #dni="ngModel" />
+        <div class="alert alert-danger" *ngIf="dni.touched && !dni.valid">Por favor ingrese un número de DNI válido</div>
+      </div>
+      <div class="form-group" *ngIf="cliente.id">
+        <label for="mascota">Seleccionar Mascota</label>
+        <select id="mascota" class="form-control" [(ngModel)]="mascotaId" (change)="alSelecionarMascota()" name="mascota">
+          <option value=""></option>
+          <ng-container *ngFor="let m of mascotas">
+            <ng-container *ngIf="!m.estaAsignada">
+              <option value="{{m.id}}">{{m.nombre}}</option>
+            </ng-container>
+          </ng-container>
+        </select>
+      </div>
+      <button class="btn btn-primary" [disabled]="!f.valid  ">Guardar</button>
+      <button *ngIf="cliente.id" class="btn btn-danger" type="button" (click)="borrar()">Borrar</button>
 </form>
 

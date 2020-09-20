@@ -3,6 +3,7 @@
 /* Provide sufficient contrast against white background */
 
 @import '~ngx-toastr/toastr';
+@import '~bootstrap/dist/css/bootstrap.css';
 a {
   color: #0366d6;
 }

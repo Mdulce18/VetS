@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using VetS.Controllers.Resources;
 using VetS.Core;
 using VetS.Core.Models;
 using VetS.Extensions;
@@ -13,10 +15,12 @@ namespace VetS.Data
     public class MascotaRepository : IMascotaRepository
     {
         private readonly VetSDbContext context;
+        private readonly IMapper mapper;
 
-        public MascotaRepository(VetSDbContext context)
+        public MascotaRepository(VetSDbContext context, IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
         public async Task<Mascota> GetMascota(int id, bool IncludeRelated = true)
         {
@@ -60,6 +64,12 @@ namespace VetS.Data
             result.Items = await query.ToListAsync();
 
             return result;
+        }
+
+        public async Task<IEnumerable<MascotaResource>> GetListaMascotas()
+        {
+            var mascotas = await context.Mascotas.ToListAsync();
+            return mapper.Map<List<Mascota>, List<MascotaResource>>(mascotas);
         }
         public void Add(Mascota mascota)
         {

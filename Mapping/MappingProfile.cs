@@ -31,6 +31,7 @@ namespace VetS.Mapping
                 .ForMember(c => c.Direccion, opt => opt.MapFrom(cr => cr.Contacto.Direccion))
                 .ForMember(c => c.Email, opt => opt.MapFrom(cr => cr.Contacto.Email))
                 .ForMember(c => c.Mascotas, opt => opt.Ignore());
+            CreateMap<ClienteQueryResource, ClienteQuery>();
             CreateMap<MascotaQueryResource, MascotaQuery>();
             CreateMap<SaveMascotaResource, Mascota>()
                 .ForMember(m => m.Id, opt => opt.Ignore());

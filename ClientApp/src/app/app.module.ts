@@ -19,11 +19,13 @@ import { MascotaListComponent } from './mascota-list/mascota-list.component';
 import { PaginationComponent } from './shared/pagination.component';
 import { ClienteService } from '../services/cliente.service';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
+import { ClienteListComponent } from './cliente-list/cliente-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClienteFormComponent,
+    ClienteListComponent,
     NavMenuComponent,
     HomeComponent,
     MascotaFormComponent,
@@ -38,6 +40,7 @@ import { ClienteFormComponent } from './cliente-form/cliente-form.component';
     RouterModule.forRoot([
       { path: '', redirectTo: 'mascotas', pathMatch: 'full' },
       { path: 'home', component: HomeComponent},
+      { path: 'clientes', component: ClienteListComponent},
       { path: 'clientes/new', component: ClienteFormComponent},
       { path: 'clientes/:id', component: ClienteFormComponent},
       { path: 'mascotas', component: MascotaListComponent },

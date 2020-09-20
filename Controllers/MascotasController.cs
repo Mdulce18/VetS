@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using VetS.Core;
 using VetS.Core.Models;
@@ -100,6 +101,12 @@ namespace VetS.Controllers.Resources
             var queryResult = await repository.GetTodasLasMascotas(filtro);
 
             return mapper.Map<QueryResult<Mascota>, QueryResultResource<MascotaResource>>(queryResult);
+        }
+
+        [HttpGet("todas")]
+        public async Task<IEnumerable<MascotaResource>> GetListaMascotas()
+        {
+            return await repository.GetListaMascotas();
         }
     }
 }

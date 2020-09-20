@@ -14,7 +14,7 @@ export class AppErrorHandler implements ErrorHandler {
       if (error.status === 400)
         this.tostrService.error('Hubo un problema con la solicitud!', 'Mensaje:')
       if (error.status === 404)
-        this.tostrService.error('No hay una mascota con ese ID !', 'Mensaje:')
+        this.tostrService.error('No hay una coincidencia en los registros con ese ID !', 'Mensaje:')
     });
 
   };
