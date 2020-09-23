@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MascotaService } from '../../services/mascota.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
+import { KeyValuePair } from '../../models/keyValuePair';
 
 @Component({
     selector: 'app-cliente-form',
@@ -23,7 +24,7 @@ export class ClienteFormComponent implements OnInit{
   filtro: any;
   clientes: any = [];
   mascotas: any = [];
-  
+  cm: KeyValuePair
   cliente: Cliente = {
     id: 0,
     contacto: {
@@ -31,9 +32,10 @@ export class ClienteFormComponent implements OnInit{
       apellido: '',
       telefono: '',
       direccion: '',
-      email: '',},
+      email: '',
+    },
     DNI: '',
-    mascotaId:0,
+    mascotaId: 0,
     clienteMascota: []
   }
   /** cliente-form ctor */

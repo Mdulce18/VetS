@@ -10,9 +10,12 @@ namespace VetS.Mapping
         public MappingProfile()
         {
             //Dominio a API Resource
+            CreateMap<Turno, TurnoResource>();
+            CreateMap<TipoTurno, TipoTurnoResource>();
             CreateMap<Cliente, ClienteResource>()
                 .ForMember(cr => cr.Contacto, opt => opt.MapFrom(c => new ContactoResource { Nombre = c.Nombre, Apellido = c.Apellido, Telefono = c.Telefono, Direccion = c.Direccion, Email = c.Email }))
-                .ForMember(cr => cr.Mascotas, opt => opt.MapFrom(c => c.Mascotas.Select(m => m.MascotaId)));
+            //.ForMember(cr => cr.Mascotas, opt => opt.MapFrom(c => c.Mascotas.Select(cm => new KeyValuePairResource { Id = cm.MascotaId, Nombre = cm.Mascota.Nombre })));
+            .ForMember(cr => cr.Mascotas, opt => opt.MapFrom(c => c.Mascotas.Select(m => m.MascotaId)));
             CreateMap(typeof(QueryResult<>), typeof(QueryResultResource<>));
             CreateMap<Animal, AnimalResource>();
             CreateMap<Raza, RazaResource>();
@@ -23,6 +26,9 @@ namespace VetS.Mapping
 
 
             //API Resource a Dominio
+            CreateMap<TurnoResource, Turno>();
+            CreateMap<TipoTurnoResource, TipoTurno>()
+                .ForMember(t => t.Id, opt => opt.Ignore());
             CreateMap<ClienteResource, Cliente>()
                 .ForMember(c => c.Id, opt => opt.Ignore())
                 .ForMember(c => c.Nombre, opt => opt.MapFrom(cr => cr.Contacto.Nombre))

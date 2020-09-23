@@ -13,6 +13,7 @@ namespace VetS.Data
         public DbSet<Mascota> Mascotas { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<ClienteMascota> ClienteMascotas { get; set; }
+        public DbSet<Turno> Turnos { get; set; }
 
 
         public VetSDbContext(

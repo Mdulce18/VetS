@@ -55,7 +55,6 @@ namespace VetS.Data
         }
         public async Task<Cliente> GetCliente(int id)
         {
-            //return await context.Clientes.FindAsync(id);
             return await context.Clientes.Include(c => c.Mascotas).SingleOrDefaultAsync(c => c.Id == id);
         }
 
