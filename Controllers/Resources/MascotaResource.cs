@@ -9,7 +9,7 @@ namespace VetS.Controllers.Resources
         public AnimalResource Animal { get; set; }
         public RazaResource Raza { get; set; }
         public bool EstaAsignada { get; set; }
-
+        public bool TieneHistoriaClinica { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public DateTime Actualizacion { get; set; }
     }

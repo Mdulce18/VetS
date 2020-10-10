@@ -8,6 +8,7 @@ import { MascotaService } from '../../services/mascota.service';
 })
 /** mascota-list component*/
 export class MascotaListComponent implements OnInit {
+
   private readonly PAGE_SIZE = 5;
   queryResult: any = {};
   animales: any = [];
@@ -30,7 +31,6 @@ export class MascotaListComponent implements OnInit {
 
   alCambiarFiltro() {
     this.filtro.page = 1;
-    //this.filtro.pageSize = this.PAGE_SIZE;
     this.llenarConMascotas();
   }
 

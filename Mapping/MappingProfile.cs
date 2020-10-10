@@ -10,6 +10,8 @@ namespace VetS.Mapping
         public MappingProfile()
         {
             //Dominio a API Resource
+
+            CreateMap<HistoriaClinica, HistoriaClinicaResource>();
             CreateMap<Turno, TurnoResource>();
             CreateMap<TipoTurno, TipoTurnoResource>();
             CreateMap<Cliente, ClienteResource>()
@@ -26,6 +28,8 @@ namespace VetS.Mapping
 
 
             //API Resource a Dominio
+
+            CreateMap<HistoriaClinicaResource, HistoriaClinica>();
             CreateMap<TurnoResource, Turno>();
             CreateMap<TipoTurnoResource, TipoTurno>()
                 .ForMember(t => t.Id, opt => opt.Ignore());

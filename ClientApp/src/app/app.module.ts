@@ -20,12 +20,15 @@ import { PaginationComponent } from './shared/pagination.component';
 import { ClienteService } from '../services/cliente.service';
 import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { ClienteListComponent } from './cliente-list/cliente-list.component';
+import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
+import { HistoriaClinicaService } from '../services/historiaClinica.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClienteFormComponent,
     ClienteListComponent,
+    HistoriaClinicaComponent,
     NavMenuComponent,
     HomeComponent,
     MascotaFormComponent,
@@ -42,7 +45,8 @@ import { ClienteListComponent } from './cliente-list/cliente-list.component';
       { path: 'home', component: HomeComponent},
       { path: 'clientes', component: ClienteListComponent},
       { path: 'clientes/new', component: ClienteFormComponent},
-      { path: 'clientes/:id', component: ClienteFormComponent},
+      { path: 'clientes/:id', component: ClienteFormComponent },
+      { path: 'historias', component: HistoriaClinicaComponent },
       { path: 'mascotas', component: MascotaListComponent },
       { path: 'mascotas/new', component: MascotaFormComponent },
       { path: 'mascotas/:id', component: MascotaFormComponent },
@@ -58,6 +62,7 @@ import { ClienteListComponent } from './cliente-list/cliente-list.component';
     { provide: ErrorHandler, useClass: AppErrorHandler },
     MascotaService,
     ClienteService,
+    HistoriaClinicaService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

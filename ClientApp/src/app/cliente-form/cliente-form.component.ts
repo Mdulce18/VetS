@@ -24,7 +24,10 @@ export class ClienteFormComponent implements OnInit{
   filtro: any;
   clientes: any = [];
   mascotas: any = [];
-  cm: KeyValuePair
+  cm: KeyValuePair = {
+    id: 0,
+    nombre:''
+  }
   cliente: Cliente = {
     id: 0,
     contacto: {
@@ -101,8 +104,9 @@ export class ClienteFormComponent implements OnInit{
     this.cliente.DNI = this.DNI;
   }
   alSelecionarMascota() {
-    this.cliente.mascotaId = Number(this.mascotaId);
+    this.cliente.mascotaId = +this.mascotaId;
     console.log("MascotaID", this.cliente.mascotaId);
+    console.log("Mascota", this.cm.id = this.cliente.mascotaId);
   }
   guardar() {
     //console.log("cliente", this.cliente);
@@ -115,11 +119,11 @@ export class ClienteFormComponent implements OnInit{
   }
 
   borrar() {
-    if (confirm("Estas seguro de borrar este Cliente?")) {
-      this.clienteService.deleteCliente(this.cliente.id)
-        .subscribe(x => {
-          this.router.navigate(['/']);
-        });
+    
+    this.clienteService.deleteCliente(this.cliente.id).subscribe(x => {
+      this.tostrService.warning('Se ha borrado de la base de datos el cliente', 'Mensaje:')
+      this.router.navigate(['/']);
+    });
+  
     }
-  }
 }

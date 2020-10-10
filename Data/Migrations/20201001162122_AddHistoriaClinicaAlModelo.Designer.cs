@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetS.Data;
 
 namespace VetS.Data.Migrations
 {
     [DbContext(typeof(VetSDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201001162122_AddHistoriaClinicaAlModelo")]
+    partial class AddHistoriaClinicaAlModelo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,10 +409,10 @@ namespace VetS.Data.Migrations
 
             modelBuilder.Entity("VetS.Core.Models.HistoriaMascota", b =>
                 {
-                    b.Property<int>("HistoriaClinicaId")
+                    b.Property<int?>("HistoriaClinicaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MascotaId")
+                    b.Property<int?>("MascotaId")
                         .HasColumnType("int");
 
                     b.HasKey("HistoriaClinicaId", "MascotaId");
@@ -446,9 +448,6 @@ namespace VetS.Data.Migrations
 
                     b.Property<int>("RazaId")
                         .HasColumnType("int");
-
-                    b.Property<bool>("TieneHistoriaClinica")
-                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 

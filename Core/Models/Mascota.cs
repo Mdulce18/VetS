@@ -15,6 +15,7 @@ namespace VetS.Core.Models
         public int RazaId { get; set; }
         public Raza Raza { get; set; }
         public bool EstaAsignada { get; set; }
+        public bool TieneHistoriaClinica { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public DateTime Actualizacion { get; set; }
 

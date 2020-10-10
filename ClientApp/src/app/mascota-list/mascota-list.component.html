@@ -5,6 +5,7 @@
 <div class="well">
   <div class="form-group">
     <label for="animal"></label>
+    <h5>Filtrar por Animal</h5>
     <select id="animal" class="form-control" [(ngModel)]="filtro.animalId" (change)="alCambiarFiltro()">
       <option value=""></option>
       <option *ngFor="let a of animales" value="{{a.id}}">{{a.nombre}}</option>
@@ -37,4 +38,4 @@
     </tr>
   </tbody>
 </table>
-<pagination [total-items]="queryResult.totalItems" [page-size]="filtro.pageSize" (page-changed)="onPageChange($event)"></pagination>    
+<pagination [total-items]="queryResult.totalItems" [page-size]="filtro.pageSize" (page-changed)="onPageChange($event)"></pagination>

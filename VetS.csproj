@@ -49,6 +49,10 @@
     <Compile Remove="Data\Migrations\20200921013026_AddTurnosAlmodelo.Designer.cs" />
     <Compile Remove="Data\Migrations\20200921013744_AddTurnosAlModelo.cs" />
     <Compile Remove="Data\Migrations\20200921013744_AddTurnosAlModelo.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200930032910_AddHistoriaClinicaAlModelo.cs" />
+    <Compile Remove="Data\Migrations\20200930032910_AddHistoriaClinicaAlModelo.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200930033350_AddHistoriaClinicaAlModelo.cs" />
+    <Compile Remove="Data\Migrations\20200930033350_AddHistoriaClinicaAlModelo.Designer.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

@@ -68,7 +68,11 @@ namespace VetS.Data
 
         public async Task<IEnumerable<MascotaResource>> GetListaMascotas()
         {
-            var mascotas = await context.Mascotas.ToListAsync();
+            var mascotas = await context.Mascotas
+                .Include(m => m.Animal)
+                  .ThenInclude(m => m.Razas)
+                  .ToListAsync();
+
             return mapper.Map<List<Mascota>, List<MascotaResource>>(mascotas);
         }
         public void Add(Mascota mascota)

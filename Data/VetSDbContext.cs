@@ -13,6 +13,8 @@ namespace VetS.Data
         public DbSet<Mascota> Mascotas { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<ClienteMascota> ClienteMascotas { get; set; }
+        public DbSet<HistoriaMascota> HistoriaMascotas { get; set; }
+        public DbSet<HistoriaClinica> HistoriaClinicas { get; set; }
         public DbSet<Turno> Turnos { get; set; }
 
 
@@ -27,6 +29,7 @@ namespace VetS.Data
         {
             base.OnModelCreating(modelBuilder);
 
+
             modelBuilder.Entity<Raza>()
             .HasOne<Animal>(r => r.Animal)
             .WithMany(a => a.Razas)
@@ -35,6 +38,27 @@ namespace VetS.Data
 
             modelBuilder.Entity<ClienteMascota>().HasKey(cm =>
              new { cm.ClienteId, cm.MascotaId });
+
+            modelBuilder.Entity<HistoriaMascota>()
+                .HasOne(hm => hm.HistoriaClinica)
+                .WithMany()
+                .HasForeignKey(hm => hm.HistoriaClinicaId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<HistoriaMascota>()
+                .HasOne(hm => hm.Mascota)
+                .WithMany()
+                .HasForeignKey(hm => hm.MascotaId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<HistoriaMascota>().HasKey(hm =>
+             new { hm.HistoriaClinicaId, hm.MascotaId });
+
+
+
+
+
+
         }
 
     }

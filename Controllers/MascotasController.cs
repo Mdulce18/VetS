@@ -74,6 +74,9 @@ namespace VetS.Controllers.Resources
             if (mascota == null)
                 return NotFound();
 
+            if (mascota.TieneHistoriaClinica)
+                return BadRequest();
+
             repository.Remove(mascota);
             await unitOfWork.CompleteAsync();
 
