@@ -2,7 +2,6 @@
 <p>
   {{historia | json}}
 </p>
-
 <form #f="ngForm" (ngSubmit)="guardar()">
   <div class="form group">
     <label for="nombre">Nombre de la Mascota</label>
@@ -21,13 +20,11 @@
     <input type="text" id="animal" [value]="mascotaSel.raza.nombre" class="form-control" placeholder="Raza" [(ngModel)]="raza" disabled />
   </div>
   <br />
-  <div >
+  <div>
     <label>Registro</label>
     <ckeditor [editor]="Editor" (change)="registro($event)" [(ngModel)]="contenido" name="contenido" required #registro="ngModel"></ckeditor>
-    <!--<ckeditor (change)="registro($event)" [(ngModel)]="contenido" name="contenido" required ></ckeditor>-->
     <div class="alert alert-danger" *ngIf="registro.touched && !registro.valid">Es requerido registrar lo acontecido con la mascota</div>
   </div>
-  
   <br />
   <div class="form group">
     <label for="veterinario">Nombre Veterinario</label>
@@ -36,11 +33,4 @@
   </div>
   <br />
   <button class="btn btn-primary" [disabled]="!f.valid  ">Guardar</button>
-
-
 </form>
-    <!--</ng-container>
-  </div>
-<div class="tab-pane fade" id="buscar" role="tabpanel" aria-labelledby="buscar-tab">...</div>
-<div class="tab-pane fade" id="vista" role="tabpanel" aria-labelledby="vista-tab">...</div>
-</div>-->

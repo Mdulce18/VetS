@@ -38,8 +38,6 @@ export class HistoriaClinicaComponent {
 
   ngOnInit() {
     this.mascotaService.getMascotas().subscribe(mascotas => this.mascotas = mascotas);
-
-    console.log("Mascotas", this.mascotas);
   }
 
   alSeleccionarNombre() {

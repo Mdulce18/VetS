@@ -14,6 +14,10 @@ export class HistoriaClinicaService {
   }
 
   getHistoria(id) {
-    return this.http.get('api/historias' + id);
+    return this.http.get('api/historias/' + id);
+  }
+
+  getHistoriasMascota(id) {
+    return this.http.get('api/historias/mascota/' + id);
   }
 }
