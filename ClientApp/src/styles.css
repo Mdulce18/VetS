@@ -17,3 +17,6 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+.ck-editor__editable_inline {
+  min-height: 150px;
+}

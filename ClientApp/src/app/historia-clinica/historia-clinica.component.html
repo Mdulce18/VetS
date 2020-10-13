@@ -20,10 +20,12 @@
     <label for="nombre">Raza</label>
     <input type="text" id="animal" [value]="mascotaSel.raza.nombre" class="form-control" placeholder="Raza" [(ngModel)]="raza" disabled />
   </div>
-  <div>
+  <br />
+  <div >
     <label>Registro</label>
+    <ckeditor [editor]="Editor" (change)="registro($event)" [(ngModel)]="contenido" name="contenido" required #registro="ngModel"></ckeditor>
     <!--<ckeditor (change)="registro($event)" [(ngModel)]="contenido" name="contenido" required ></ckeditor>-->
-    <!--<div class="alert alert-danger" *ngIf="registro.touched && !registro.valid">Es requerido registrar lo acontecido con la mascota</div>-->
+    <div class="alert alert-danger" *ngIf="registro.touched && !registro.valid">Es requerido registrar lo acontecido con la mascota</div>
   </div>
   
   <br />

@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
 import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -37,6 +38,7 @@ import { HistoriaClinicaService } from '../services/historiaClinica.service';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    CKEditorModule,
     HttpClientModule,
     FormsModule,
     ApiAuthorizationModule,

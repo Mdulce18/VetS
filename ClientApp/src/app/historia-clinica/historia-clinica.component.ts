@@ -1,3 +1,5 @@
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { ChangeEvent } from '@ckeditor/ckeditor5-angular/ckeditor.component';
 import { Component } from '@angular/core';
 import { ClienteService } from '../../services/cliente.service';
 import { MascotaService } from '../../services/mascota.service';
@@ -12,6 +14,10 @@ import { ToastrService } from 'ngx-toastr';
 /** historia-clinica component*/
 export class HistoriaClinicaComponent {
 /** historia-clinica ctor */
+  public config = {
+    placeholder: 'Escriba el nuevo registro de la mascota...!'
+  }
+  public Editor = ClassicEditor;
   mascotaId: number;
   contenido: string;
   htmlContent: string;
@@ -43,10 +49,10 @@ export class HistoriaClinicaComponent {
     console.log("MascotaSeleccionada", this.mascotaSel)
   }
 
-  registro(event) {
-    this.contenido = event.getData();
+  registro({ editor }: ChangeEvent) {
+    this.contenido = editor.getData();
     this.historia.contenido = this.contenido;
-    console.log(event.getData());
+    console.log(editor.getData());
     console.log("Contenido", this.contenido)
   }
   nombreVeterinario() {
