@@ -1,0 +1,27 @@
+<h1>Registro N° {{historia.id}}</h1>
+<br />
+<h3>Datos del registro</h3>
+<br />
+<div>
+  <ckeditor [editor]="Editor" data="{{historia.contenido}}"></ckeditor>
+</div>
+<br />
+  <div class="form group" >
+    <label for="fecha">Fecha </label>
+    <input type="text" id="fecha" [value]="historia.fecha| date:'medium'" class="form-control" disabled />
+    <label for="vete">Veterinario</label>
+    <input type="text" id="vete" [value]="historia.nombreVet" class="form-control" disabled />
+    <label for="nombre">Nombre de la Mascota</label>
+    <input type="text" id="nombre" [value]="mascota.nombre" class="form-control"  disabled />
+    <label for="mascotaid">Mascota ID</label>
+    <input type="text" id="mascotaid" [value]="mascota.id" class="form-control" disabled />
+    <label for="mascotafn">Fecha de Nacimiento</label>
+    <input type="text" id="mascotafn" [value]="mascota.fechaNacimiento| date:'yyyy-MM-dd'" class="form-control" disabled />
+    <label for="animal">Tipo de Animal</label>
+    <input type="text" id="animal" [value]="mascota.animal.nombre" class="form-control" disabled />
+    <label for="raza">Raza</label>
+    <input type="text" id="raza" [value]="mascota.raza.nombre" class="form-control" disabled />
+  </div>
+
+<br />
+<button class="btn btn-secondary" [routerLink]="['/busquedas']">Nueva Busqueda</button>

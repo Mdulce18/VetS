@@ -1,6 +1,6 @@
 <h1>Historia Clínica</h1>
 <p>
-  {{historia | json}}
+  <!--{{historia | json}}-->
 </p>
 <form #f="ngForm" (ngSubmit)="guardar()">
   <div class="form group">
@@ -22,7 +22,7 @@
   <br />
   <div>
     <label>Registro</label>
-    <ckeditor [editor]="Editor" (change)="registro($event)" [(ngModel)]="contenido" name="contenido" required #registro="ngModel"></ckeditor>
+    <ckeditor [editor]="Editor" (change)="registro($event)" [(ngModel)]="contenido" name="contenido" required ></ckeditor>
     <div class="alert alert-danger" *ngIf="registro.touched && !registro.valid">Es requerido registrar lo acontecido con la mascota</div>
   </div>
   <br />

@@ -5,6 +5,7 @@ import { ClienteService } from '../../services/cliente.service';
 import { MascotaService } from '../../services/mascota.service';
 import { HistoriaClinicaService } from '../../services/historiaClinica.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-historia-clinica',
@@ -13,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 /** historia-clinica component*/
 export class HistoriaClinicaComponent {
-/** historia-clinica ctor */
+  /** historia-clinica ctor */
   public config = {
     placeholder: 'Escriba el nuevo registro de la mascota...!'
   }
@@ -25,16 +26,17 @@ export class HistoriaClinicaComponent {
   mascotas: any = [];
   mascotaSel: any;
   historia: any = {
-  mascotaId: 0,
-  contenido: '',
-  nombreVet: ''
-}
+    mascotaId: 0,
+    contenido: '',
+    nombreVet: ''
+  }
 
   constructor(
-            private mascotaService: ClienteService,
-            private buscadormascota: MascotaService,
-            private historiaClinica: HistoriaClinicaService,
-            private tostrService: ToastrService,) { }
+    private mascotaService: ClienteService,
+    private buscadormascota: MascotaService,
+    private historiaClinica: HistoriaClinicaService,
+    private router: Router,
+    private tostrService: ToastrService,) { }
 
   ngOnInit() {
     this.mascotaService.getMascotas().subscribe(mascotas => this.mascotas = mascotas);
@@ -58,6 +60,10 @@ export class HistoriaClinicaComponent {
   }
   guardar() {
     this.historiaClinica.createHistoria(this.historia)
-      .subscribe(x => this.tostrService.success('Añadido un nuevo registro a la historia clínica de la mascota', 'Mensaje:'))
-  }
+      .subscribe(x => {
+        this.tostrService.success('Añadido un nuevo registro a la historia clínica de la mascota', 'Mensaje:')
+        this.router.navigate(['/busquedas'])
+      });
+  
+}
 }

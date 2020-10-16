@@ -24,6 +24,7 @@ import { ClienteListComponent } from './cliente-list/cliente-list.component';
 import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.component';
 import { HistoriaClinicaService } from '../services/historiaClinica.service';
 import { HistoriaClinicaSearchComponent } from './historia-clinica-search/historia-clinica-search.component';
+import { HistoriaClinicaViewComponent } from './historia-clinica-view/historia-clinica-view.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { HistoriaClinicaSearchComponent } from './historia-clinica-search/histor
     ClienteListComponent,
     HistoriaClinicaComponent,
     HistoriaClinicaSearchComponent,
+    HistoriaClinicaViewComponent,
     NavMenuComponent,
     HomeComponent,
     MascotaFormComponent,
@@ -51,6 +53,7 @@ import { HistoriaClinicaSearchComponent } from './historia-clinica-search/histor
       { path: 'clientes/new', component: ClienteFormComponent},
       { path: 'clientes/:id', component: ClienteFormComponent },
       { path: 'historias', component: HistoriaClinicaComponent },
+      { path: 'historias/:id', component: HistoriaClinicaViewComponent },
       { path: 'busquedas', component: HistoriaClinicaSearchComponent },
       { path: 'mascotas', component: MascotaListComponent },
       { path: 'mascotas/new', component: MascotaFormComponent },
