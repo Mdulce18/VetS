@@ -18,6 +18,7 @@ export class HistoriaClinicaViewComponent implements OnInit {
   historiaId: number;
   historia: any;
   public Editor = ClassicEditor;
+  public isDisabled = true;
 
   constructor(
     private route: ActivatedRoute,

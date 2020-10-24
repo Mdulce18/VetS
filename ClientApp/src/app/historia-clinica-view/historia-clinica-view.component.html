@@ -3,7 +3,7 @@
 <h3>Datos del registro</h3>
 <br />
 <div>
-  <ckeditor [editor]="Editor" data="{{historia.contenido}}"></ckeditor>
+  <ckeditor [editor]="Editor" [disabled]="isDisabled" data="{{historia.contenido}}"></ckeditor>
 </div>
 <br />
   <div class="form group" >

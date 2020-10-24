@@ -1,5 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular'
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/interaction';
+import timegridPlugin from '@fullcalendar/interaction';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -25,9 +30,18 @@ import { HistoriaClinicaComponent } from './historia-clinica/historia-clinica.co
 import { HistoriaClinicaService } from '../services/historiaClinica.service';
 import { HistoriaClinicaSearchComponent } from './historia-clinica-search/historia-clinica-search.component';
 import { HistoriaClinicaViewComponent } from './historia-clinica-view/historia-clinica-view.component';
+import { AgendaComponent } from './agenda/agenda.component';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  interactionPlugin,
+  listPlugin,
+  timegridPlugin
+])
 
 @NgModule({
   declarations: [
+    AgendaComponent,
     AppComponent,
     ClienteFormComponent,
     ClienteListComponent,
@@ -45,10 +59,12 @@ import { HistoriaClinicaViewComponent } from './historia-clinica-view/historia-c
     CKEditorModule,
     HttpClientModule,
     FormsModule,
+    FullCalendarModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'mascotas', pathMatch: 'full' },
       { path: 'home', component: HomeComponent},
+      { path: 'agenda', component: AgendaComponent},
       { path: 'clientes', component: ClienteListComponent},
       { path: 'clientes/new', component: ClienteFormComponent},
       { path: 'clientes/:id', component: ClienteFormComponent },

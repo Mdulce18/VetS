@@ -105,7 +105,6 @@ export class MascotaFormComponent implements OnInit {
   }
 
   borrar() {
-    //if (confirm("Estas seguro de borrar esta mascota?")) 
       this.mascotaService.deleteMascota(this.mascota.id)
         .subscribe(x => {
           this.tostrService.warning('Se ha borrado de la base de datos la mascota', 'Mensaje:')
