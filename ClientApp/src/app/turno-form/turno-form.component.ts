@@ -15,7 +15,7 @@ export class TurnoFormComponent implements OnInit {
 
   fecha: string;
   turno: any = {
-    id: 0,
+    id: '',
     clienteId: '',
     tipoTurnoId: '',
     dia: '',
@@ -67,9 +67,9 @@ export class TurnoFormComponent implements OnInit {
   setTurno(t) {
     this.turno.id = t.id;
     this.turno.clienteId = t.clienteId;
-    this.turno.turnoId = t.tipoTurnoId;
+    this.turno.tipoTurnoId = t.tipoTurnoId;
     this.turno.dia = t.dia;
-    this.turno.observaciones = t.obsevaciones
+    this.turno.observaciones = t.observaciones
   }
 
   alSeleccionarfecha() {
@@ -83,7 +83,7 @@ export class TurnoFormComponent implements OnInit {
     this.turno.clienteId = Number(this.turno.clienteId);
   }
   alingresarObservaciones() {
-    this.turno.observaciones = this.observaciones;
+    this.turno.observaciones = this.turno.observaciones;
   }
 
   guardar() {

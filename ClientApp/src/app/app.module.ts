@@ -65,7 +65,7 @@ FullCalendarModule.registerPlugins([
     FullCalendarModule,
     ApiAuthorizationModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'mascotas', pathMatch: 'full' },
+      { path: '', redirectTo: 'agenda', pathMatch: 'full' },
       { path: 'agenda', component: AgendaComponent },
       { path: 'busquedas', component: HistoriaClinicaSearchComponent },
       { path: 'clientes', component: ClienteListComponent},

@@ -11,9 +11,8 @@ namespace VetS.Core.Models
 
         [Required]
         public DateTime Dia { get; set; }
-        public string Horario { get; set; }
-        [Required]
 
+        [Required]
         public int TipoTurnoId { get; set; }
         public TipoTurno TipoTurno { get; set; }
         public string Observaciones { get; set; }

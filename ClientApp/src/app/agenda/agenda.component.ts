@@ -27,25 +27,26 @@ export class AgendaComponent implements OnInit {
       this.eventsModel = eventModel;
       console.log("Eventos: ", this.eventsModel);
       for (var e of this.eventsModel) {
-        this.eventFC.push({title: e.observaciones, start: e.dia })
+        this.eventFC.push({ id:e.id, start: e.dia, title: e.observaciones, editable: false })
       };
       console.log("EFC: ", this.eventFC);
+      this.calendarOptions = {
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
+        slotMinTime: "08:00:00",
+        slotMaxTime: "20:00:00",
+        editable: true,
+        events: this.eventFC,
+        //locale: esLocale,
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'timeGridDay timeGridWeek dayGridMonth'
+        },
+        dateClick: this.handleDateClick.bind(this),
+        eventClick: this.handleEventClick.bind(this),
+        eventDragStop: this.handleEventDragStop.bind(this)
+      };
     });
-    this.calendarOptions = {
-      plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
-      editable: true,
-      //eventSources: 
-      events: this.eventFC,
-      //locale: esLocale,
-      headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'timeGridDay timeGridWeek dayGridMonth'
-      },
-      dateClick: this.handleDateClick.bind(this),
-      eventClick: this.handleEventClick.bind(this),
-      eventDragStop: this.handleEventDragStop.bind(this)
-    };
   }
   
   handleDateClick(arg) {

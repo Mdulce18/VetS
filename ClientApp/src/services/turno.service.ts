@@ -26,10 +26,10 @@ export class TurnoService {
   }
 
   updateTurno(turno) {
-    return this.http.put('/api/turnos' + turno.id, turno);
+    return this.http.put('/api/turnos/' + turno.id, turno);
   }
 
   deleteTurno(id) {
-    return this.http.delete('/api/turnos' + id);
+    return this.http.delete('/api/turnos/' + id);
   }
 }

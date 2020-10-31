@@ -1,3 +1,6 @@
+<h1 *ngIf="!turno.id">Nuevo Turno</h1>
+<h1 *ngIf="turno.id">Editar Turno</h1>
+
 <p>
   {{turno | json}}
 </p>
@@ -24,12 +27,12 @@
   </div>
   <div class="form group">
     <label for="observ">Observacion</label>
-    <input type="text" id="observ" class="form-control" [value]="observaciones" [(ngModel)]="observaciones" (change)="alingresarObservaciones()" name="observ" />
+    <input type="text" id="observ" class="form-control" [value]="turno.observaciones" [(ngModel)]="turno.observaciones" (change)="alingresarObservaciones()" name="observ" />
   </div>
   <br />
   <button class="btn btn-primary" [disabled]="!f.valid  ">Guardar</button>
   <!-- Button trigger modal -->
-  <button *ngIf="cliente.id" class="btn btn-danger" type="button" data-toggle="modal" data-target="#staticBackdrop">Borrar</button>
+  <button *ngIf="turno.id" class="btn btn-danger" type="button" data-toggle="modal" data-target="#staticBackdrop">Borrar</button>
 
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
