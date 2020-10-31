@@ -1,0 +1,54 @@
+<p>
+  {{turno | json}}
+</p>
+<form #f="ngForm" (ngSubmit)="guardar()">
+  <div class="form group">
+    <label for="fecha">Fecha</label>
+    <input type="datetime-local" id="fecha" [value]="turno.dia" class="form-control" [(ngModel)]="turno.dia" (change)="alSeleccionarFecha()" name="fecha" required #fecha="ngModel" />
+    <div class="alert alert-danger" *ngIf="fecha.touched && !fecha.valid">Por favor ingrese una Fecha</div>
+  </div>
+  <div class="form-group">
+    <label for="tipo">Tipo de Turno</label>
+    <select id="tipo" class="form-control" [value]="turno.tipoTurnoId" [(ngModel)]="turno.tipoTurnoId" (change)="alCambiarTipoTurno()" name="tipo" required #tipo="ngModel">
+      <option value=""></option>
+      <option *ngFor="let t of tipoTurno" value="{{ t.id }}">{{ t.descripcion }}</option>
+    </select>
+    <div class="alert alert-danger" *ngIf="tipo.touched && !tipo.valid">Por favor seleccione un tipo de turno</div>
+  </div>
+  <div class="form-group">
+    <label for="cliente">Cliente</label>
+    <select id="cliente" class="form-control" [value]="turno.clienteId" [(ngModel)]="turno.clienteId" (change)="alSeleccionarCliente()" name="cliente">
+      <option value=""></option>
+      <option *ngFor="let c of cliente" value="{{ c.id }}">{{ c.contacto.nombre }}</option>
+    </select>
+  </div>
+  <div class="form group">
+    <label for="observ">Observacion</label>
+    <input type="text" id="observ" class="form-control" [value]="observaciones" [(ngModel)]="observaciones" (change)="alingresarObservaciones()" name="observ" />
+  </div>
+  <br />
+  <button class="btn btn-primary" [disabled]="!f.valid  ">Guardar</button>
+  <!-- Button trigger modal -->
+  <button *ngIf="cliente.id" class="btn btn-danger" type="button" data-toggle="modal" data-target="#staticBackdrop">Borrar</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="staticBackdropLabel">Advertencia</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Está seguro que desea borrar este registro de la base de datos ?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" (click)="borrar()" data-dismiss="modal">Aceptar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

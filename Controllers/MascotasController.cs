@@ -22,8 +22,6 @@ namespace VetS.Controllers.Resources
             this.unitOfWork = unitOfWork;
         }
 
-
-
         [HttpPost]
         public async Task<IActionResult> CrearMascota([FromBody] SaveMascotaResource mascotaResource)
         {
@@ -81,7 +79,6 @@ namespace VetS.Controllers.Resources
             await unitOfWork.CompleteAsync();
 
             return Ok(id);
-
         }
 
         [HttpGet("{id}")]

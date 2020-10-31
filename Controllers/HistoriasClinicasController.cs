@@ -29,7 +29,6 @@ namespace VetS.Controllers
         }
 
         [HttpPost]
-
         public async Task<IActionResult> CrearHistoria([FromBody] HistoriaClinicaResource historiaClinicaResource)
         {
             if (!ModelState.IsValid)
@@ -51,7 +50,6 @@ namespace VetS.Controllers
         }
 
         [HttpGet("{id}")]
-
         public async Task<IActionResult> TraerHistoria(int id)
         {
             var historia = await historiaClinicaRepository.GetHistoria(id);
@@ -62,11 +60,9 @@ namespace VetS.Controllers
             var historiaResource = mapper.Map<HistoriaClinica, HistoriaClinicaResource>(historia);
 
             return Ok(historiaResource);
-
         }
 
         [HttpGet("mascota/{mascotaId}")]
-
         public async Task<IEnumerable<HistoriaClinicaResource>> TraerHistoriasMascota(int mascotaId)
         {
             var historias = await historiaClinicaRepository.GetListaHistorias(mascotaId);

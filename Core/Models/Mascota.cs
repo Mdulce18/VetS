@@ -18,6 +18,5 @@ namespace VetS.Core.Models
         public bool TieneHistoriaClinica { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public DateTime Actualizacion { get; set; }
-
     }
 }

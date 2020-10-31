@@ -31,10 +31,6 @@ namespace VetS.Data
               .Include(c => c.Mascotas)
               .AsQueryable();
 
-
-            //if (queryObj.MascotaId.HasValue)
-            //    query = query.Where(c => c.Mascotas.SingleOrDefault(cm.MascotaId=queryObj.MascotaId.Value));
-
             var columnas = new Dictionary<string, Expression<Func<Cliente, object>>>()
             {
                 ["Nombre"] = c => c.Nombre,
@@ -57,20 +53,15 @@ namespace VetS.Data
         {
             return await context.Clientes.Include(c => c.Mascotas).SingleOrDefaultAsync(c => c.Id == id);
         }
-
-
         public async Task<IEnumerable<ClienteResource>> GetClientes()
         {
             var clientes = await context.Clientes.Include(c => c.Mascotas).ToListAsync();
             return mapper.Map<List<Cliente>, List<ClienteResource>>(clientes);
-
         }
-
         public void Add(Cliente cliente)
         {
             context.Clientes.Add(cliente);
         }
-
         public void Remove(Cliente cliente)
         {
             context.Remove(cliente);

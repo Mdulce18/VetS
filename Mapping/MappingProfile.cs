@@ -30,9 +30,9 @@ namespace VetS.Mapping
             //API Resource a Dominio
 
             CreateMap<HistoriaClinicaResource, HistoriaClinica>();
-            CreateMap<TurnoResource, Turno>();
-            CreateMap<TipoTurnoResource, TipoTurno>()
-                .ForMember(t => t.Id, opt => opt.Ignore());
+            CreateMap<TurnoResource, Turno>()
+            .ForMember(t => t.Id, opt => opt.Ignore());
+            CreateMap<TipoTurnoResource, TipoTurno>();
             CreateMap<ClienteResource, Cliente>()
                 .ForMember(c => c.Id, opt => opt.Ignore())
                 .ForMember(c => c.Nombre, opt => opt.MapFrom(cr => cr.Contacto.Nombre))

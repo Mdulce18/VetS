@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using VetS.Controllers.Resources;
-using VetS.Data;
 using VetS.Core.Models;
+using VetS.Data;
 
 namespace VetS.Controllers
 {
@@ -19,7 +19,6 @@ namespace VetS.Controllers
             this.context = context;
             this.mapper = mapper;
         }
-
         public VetSDbContext Context { get; }
 
         [HttpGet("/api/animales")]

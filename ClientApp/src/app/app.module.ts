@@ -31,6 +31,8 @@ import { HistoriaClinicaService } from '../services/historiaClinica.service';
 import { HistoriaClinicaSearchComponent } from './historia-clinica-search/historia-clinica-search.component';
 import { HistoriaClinicaViewComponent } from './historia-clinica-view/historia-clinica-view.component';
 import { AgendaComponent } from './agenda/agenda.component';
+import { TurnoService } from '../services/turno.service';
+import { TurnoFormComponent } from './turno-form/turno-form.component';
 
 FullCalendarModule.registerPlugins([
   dayGridPlugin,
@@ -48,11 +50,12 @@ FullCalendarModule.registerPlugins([
     HistoriaClinicaComponent,
     HistoriaClinicaSearchComponent,
     HistoriaClinicaViewComponent,
-    NavMenuComponent,
     HomeComponent,
+    NavMenuComponent,
     MascotaFormComponent,
     MascotaListComponent,
-    PaginationComponent
+    PaginationComponent,
+    TurnoFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -63,17 +66,20 @@ FullCalendarModule.registerPlugins([
     ApiAuthorizationModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'mascotas', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent},
-      { path: 'agenda', component: AgendaComponent},
+      { path: 'agenda', component: AgendaComponent },
+      { path: 'busquedas', component: HistoriaClinicaSearchComponent },
       { path: 'clientes', component: ClienteListComponent},
       { path: 'clientes/new', component: ClienteFormComponent},
       { path: 'clientes/:id', component: ClienteFormComponent },
       { path: 'historias', component: HistoriaClinicaComponent },
       { path: 'historias/:id', component: HistoriaClinicaViewComponent },
-      { path: 'busquedas', component: HistoriaClinicaSearchComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'mascotas', component: MascotaListComponent },
       { path: 'mascotas/new', component: MascotaFormComponent },
       { path: 'mascotas/:id', component: MascotaFormComponent },
+      { path: 'turnos', component: TurnoFormComponent },
+      { path: 'turnos/new', component: TurnoFormComponent },
+      { path: 'turnos/:id', component: TurnoFormComponent },
     ]),
     BrowserAnimationsModule,
     ToastrModule.forRoot({
@@ -87,6 +93,7 @@ FullCalendarModule.registerPlugins([
     MascotaService,
     ClienteService,
     HistoriaClinicaService,
+    TurnoService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

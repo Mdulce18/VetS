@@ -36,6 +36,5 @@ namespace VetS.Core.Models
         {
             Mascotas = new Collection<ClienteMascota>();
         }
-
     }
 }

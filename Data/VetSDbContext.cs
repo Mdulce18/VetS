@@ -16,6 +16,7 @@ namespace VetS.Data
         public DbSet<HistoriaMascota> HistoriaMascotas { get; set; }
         public DbSet<HistoriaClinica> HistoriaClinicas { get; set; }
         public DbSet<Turno> Turnos { get; set; }
+        public DbSet<TipoTurno> TipoTurnos { get; set; }
 
 
         public VetSDbContext(

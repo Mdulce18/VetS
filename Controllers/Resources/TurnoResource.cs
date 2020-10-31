@@ -10,9 +10,7 @@ namespace VetS.Controllers.Resources
 
         [Required]
         public DateTime Dia { get; set; }
-
-        [Required]
-        [StringLength(10)]
+        
         public string Horario { get; set; }
 
         [Required]

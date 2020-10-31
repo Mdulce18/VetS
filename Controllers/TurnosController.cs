@@ -40,7 +40,6 @@ namespace VetS.Controllers
         }
 
         [HttpGet("{id}")]
-
         public async Task<IActionResult> TraerTurno(int id)
         {
             var turno = await repository.GetTurno(id);
@@ -50,6 +49,19 @@ namespace VetS.Controllers
 
             var resultado = mapper.Map<Turno, TurnoResource>(turno);
             return Ok(resultado);
+        }
+
+        [HttpGet("todos")]
+        public async Task<IActionResult> TraerTodosLosTurnos()
+        {
+            var turnos = await repository.GetTodosLosTurnos();
+            return Ok(turnos);
+        }
+        [HttpGet("tipos")]
+        public async Task<IActionResult> TraerTiposDeTurnos()
+        {
+            var tipos = await repository.GetTipoDeTurnos();
+            return Ok(tipos);
         }
 
         [HttpPut("{id}")]

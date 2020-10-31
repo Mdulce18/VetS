@@ -41,4 +41,8 @@ export class ClienteService {
 
     return partes.join('&');
   }
+
+  getListaClientes() {
+    return this.http.get('/api/clientes/todos');
+  }
 }

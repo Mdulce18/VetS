@@ -103,7 +103,6 @@ namespace VetS.Controllers
             return Ok(resultado);
         }
 
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> BorrarCliente(int id)
         {
@@ -140,11 +139,12 @@ namespace VetS.Controllers
 
             return mapper.Map<QueryResult<Cliente>, QueryResultResource<ClienteResource>>(queryResult);
         }
-        //public async Task<IEnumerable<ClienteResource>> TraerClientes()
-        //{
-        //    return await repository.GetClientes();
 
-        //}
-
+        [HttpGet("todos")]
+        public async Task<IActionResult> TraerListaClientes()
+        {
+            var clientes = await repository.GetClientes();
+            return Ok(clientes);
+        }
     }
 }
