@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import esLocale from '@fullcalendar/core/locales/es';
+import { Router } from '@angular/router';
 import { TurnoService } from '../../services/turno.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class AgendaComponent implements OnInit {
 
   @ViewChild('fullcalendar', { static: false }) fullcalendar: FullCalendarComponent;
 
-  constructor(private turnoService: TurnoService) { }
+  constructor(private turnoService: TurnoService, private router: Router,) { }
 
   ngOnInit() {
     this.turnoService.getTunos().subscribe(eventModel => {
@@ -55,6 +56,10 @@ export class AgendaComponent implements OnInit {
 
   handleEventClick(arg) {
     console.log(arg);
+    if (confirm("quiere modificar los datos del turno?")) {
+      this.router.navigate(['/turnos/' + arg.event._def.publicId]);
+        };
+    //$("#eventoBackdrop").modal("show");
   }
 
   handleEventDragStop(arg) {

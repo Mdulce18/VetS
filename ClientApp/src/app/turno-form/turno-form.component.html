@@ -1,9 +1,9 @@
 <h1 *ngIf="!turno.id">Nuevo Turno</h1>
 <h1 *ngIf="turno.id">Editar Turno</h1>
 
-<p>
+<!--<p>
   {{turno | json}}
-</p>
+</p>-->
 <form #f="ngForm" (ngSubmit)="guardar()">
   <div class="form group">
     <label for="fecha">Fecha</label>
